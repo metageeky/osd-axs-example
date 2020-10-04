@@ -1,0 +1,264 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>OSD AXS Example</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js" integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg==" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+	<style>
+		/* Wrapper is needed to create extra space*/
+		.gallery_image-wrapper {
+			padding: 1rem;
+		}
+
+		.gallery_image {
+			max-width: 450px;
+		}
+
+		.gallery_image-description {
+			word-wrap: break-word;
+			word-break: break-word;
+		}
+
+		.gallery_image-graphic {
+			margin: 0 0 1rem 0;
+			/* Add small spacing between image and description */
+			padding: 0 0 56.25% 0;
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+
+		.gallery_image-graphic-inline {
+			max-width: 100%;
+			margin: 0 0 1rem 0;
+			display: block;
+		}
+	</style>
+	<style>
+		* { box-sizing: border-box; }
+		*:focus {
+			outline: #203299 solid 2px !important;
+			outline-offset: 2px !important;
+		}
+		.screen-reader-text {
+			 border: 0;
+			 clip: rect(1px, 1px, 1px, 1px);
+			 -webkit-clip-path: inset(50%);
+			 clip-path: inset(50%);
+			 height: 1px;
+			 margin: -1px;
+			 overflow: hidden;
+			 padding: 0;
+			 position: absolute !important;
+			 width: 1px;
+			 word-wrap: normal !important;
+		}
+		.su-osd-toolbar {
+			margin-bottom: 5px;
+		}
+		.su-osd-toolbar button { 
+			background: #ddd; 
+			width: 34px; 
+			height: 34px; 
+			padding: 0; 
+			font-size: 24px; 
+			border-radius: 50%; 
+			border: solid 1px;
+			line-height: 1;
+		} 
+		.su-osd-toolbar > div {
+			display: none;
+		}
+		.su-osd-toolbar button:focus {
+			background: #203299;
+			border-color: #203299;
+			color: #fff;
+			outline: none !important;
+		}
+		.su-osd-toolbar button + button { 
+			margin-left: 5px;
+		}
+		.suarrmaterials-zoomable-image-axs { 
+			border: solid 1px #000; 
+			padding: 5px;
+		} 
+		.suarrmaterials-zoomable-image-axs:focus-within {
+			box-shadow: inset 0px 0px 5px 0px #2B72D7;
+			border-color: #2B72D7;
+		}
+		
+		#toolbar-template {
+			display:none;
+		}
+		.su-osd-toolbar button.su-osd-full {
+			display: inline-block; 
+		}
+		.su-osd-toolbar button.su-osd-collapse {
+			display: none;
+		}
+		body.full-page {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			justify-content: flex-start;
+			align-content: flex-start;
+			align-items: flex-start;
+		}
+		body.full-page .su-osd-toolbar {
+			margin: 5px;
+		}
+		body.full-page .suarrmaterials-zoomable-image-axs {
+			width: 100% !important;
+			height: auto !important;
+			flex: 1 1 auto;
+			padding: 5px !important;
+		}
+		body.full-page .su-osd-toolbar button.su-osd-full {
+			display: none; 
+		}
+		body.full-page .su-osd-toolbar button.su-osd-collapse {
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<h1>OSD</h1>
+	<div id="toolbar-template" class="su-osd-toolbar">
+		<button class="su-osd-zoomin" aria-label="Zoom in" title="Zoom in">
+			<span class="fa fa-plus-circle"></span>
+		</button>
+		<button class="su-osd-zoomout"aria-label="Zoom out" title="Zoom out">
+			<span class="fa fa-minus-circle"></span>
+		</button>
+		<button class="su-osd-reset" aria-label="Reset viewer" title="Reset viewer">
+			<span class="fa fa-life-ring"></span>
+		</button>
+		<button class="su-osd-rotateleft"aria-label="Rotate left" title="Rotate left">
+			<span class="fa fa-rotate-left"></span>
+		</button>
+		<button class="su-osd-rotateright" aria-label="Rotate right" title="Rotate right">
+			<span class="fa fa-rotate-right"></span>
+		</button>
+		<button class="su-osd-full" aria-label="Enter fullscreen" title="Enter fullscreen">
+			<span class="fa fa-expand"></span>
+		</button>
+		<button class="su-osd-collapse" aria-label="Exit fullscreen" title="Exit fullscreen">
+			<span class="fa fa-compress"></span>
+		</button>
+		<button class="su-osd-info" aria-label="Show keyboard commands" title="Show keyboard commands">
+			<span class="fa fa-info-circle"></span>
+		</button>
+	</div>
+
+	<span style="display:none" id="image-viewer-text">Image Viewer for </span>
+
+	<div class="gallery">
+		<h2 class="screen-reader-text">Sample Gallery</h2>
+		<div class="gallery_image-wrapper">
+			<div class="gallery_image">
+				<h3 class="gallery_image-title">Medium Density square (DSC-17341)
+				</h3>
+				<figure> 
+					<div id="materials-17341" class="suarrmaterials-zoomable-image-axs" style="height:400px; width:400px;" data-image="DSC_0331-2.jpg">
+					</lldiv>
+				</figure>
+				<div class="gallery_image-description" id="">
+					Camembert 
+				</div> <!-- end of description -->
+			</div> <!-- end of gallery-image -->
+			
+			<div class="gallery_image">
+				<h3 class="gallery_image-title">Medium Density square (DSC-17342)
+				</h3>
+				<figure aria-labelledby="image-viewer-text d-materials-17342-name" aria-describedby="d-materials-17341-desc">
+					<div id="materials-17342" class="suarrmaterials-zoomable-image-axs" style="height:400px; width:400px;" data-image="DSC_0143-1.jpg">
+					</div>
+				</figure>
+				<div class="gallery_image-description" id="">
+					Camembert 
+				</div> <!-- end of description -->
+			</div> <!-- end of gallery-image -->
+		</div> <!-- end of gallery-image-wrapper -->
+	</div> <!-- end of gallery -->
+	
+<script>
+(function($) {
+	$(document).ready(function() {
+		$('.suarrmaterials-zoomable-image-axs').each( function() {
+			var imageId = $(this).attr('id');
+			var imagePath = "images/" + $("#" + imageId).attr('data-image');
+			var figure = $(this).parent();
+			var title = figure.siblings('.gallery_image-title');
+			var desc = figure.siblings('.gallery_image-description');
+
+			title.attr('id', imageId + '-title');
+			desc.attr('id', imageId + '-description');
+			
+			figure.attr('aria-labelledby', 'image-viewer-text ' + title.attr('id'));
+			figure.attr('aria-describedby', desc.attr('id'));
+			
+			var toolbar = $('#toolbar-template').clone();
+			toolbar.attr('id', 'toolbar-' + imageId);
+			$(this).parent().prepend(toolbar);
+			
+			var viewer = OpenSeadragon({
+				id: imageId,
+				toolbar: 'toolbar-' + imageId,
+				prefixUrl: "/images/",
+				tileSources:{
+					 type: "image",
+					 url: imagePath,
+					 buildPyramid: false
+				}
+			});
+			viewer.addHandler('open', function() { 
+				
+				toolbar.find('.su-osd-zoomin').click(function() {
+					viewer.viewport.zoomBy(1.5);
+					viewer.viewport.applyConstraints();
+				});
+				toolbar.find('.su-osd-zoomout').click(function() {
+					viewer.viewport.zoomBy(0.667);
+					viewer.viewport.applyConstraints();
+				});
+				toolbar.find('.su-osd-reset').click(function() {
+					viewer.viewport.goHome();
+					viewer.viewport.applyConstraints();
+				});
+				toolbar.find('.su-osd-rotateleft').click(function() {
+					viewer.viewport.setRotation(viewer.viewport.getRotation() - 90);
+					viewer.viewport.applyConstraints();
+				});
+				toolbar.find('.su-osd-full').click(function() {
+					viewer.setFullPage(true);
+					$('body').toggleClass('full-page');
+					$('body').attr('data-current-viewer', imageId);
+				});
+				toolbar.find('.su-osd-collapse').click(function() {
+					viewer.setFullPage(false);
+					$('body').toggleClass('full-page');
+					$('body').removeAttr('data-current-viewer');
+				});
+				toolbar.find('.su-osd-rotateright').click(function() {
+					viewer.viewport.setRotation(viewer.viewport.getRotation() + 90);
+					viewer.viewport.applyConstraints();
+				});
+				
+			});
+		}); // end of each
+		
+		$('body').keyup(function(e) {
+			if(e.key == 'Escape' && $('body').hasClass('full-page')) {
+				var id = $('body').attr('data-current-viewer');
+				$('#toolbar-' + id + ' button.su-osd-collapse').click();
+				$('#toolbar-' + id + ' button.su-osd-full').focus();
+				//$('body').toggleClass('full-page');
+			}
+		});
+	}); // end of ready
+})(jQuery);
+</script>
+</body>
+</html>
