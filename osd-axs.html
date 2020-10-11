@@ -292,7 +292,7 @@
 		}
 	</style>
 </head>
-<body>
+<body class="show-tooltips">
 	<h1>Accessibility Wrappings for OpenSeaDragon</h1>
 	<div id="toolbar-template" class="su-osd-toolbar">
 		<button class="su-osd-zoomin">
@@ -452,7 +452,7 @@
 			var viewer = OpenSeadragon({
 				id: imageId,
 				toolbar: 'toolbar-' + imageId,
-				prefixUrl: "/images/",
+				prefixUrl: "images/",
 				tileSources:{
 					type: "image",
 					url: imagePath,
