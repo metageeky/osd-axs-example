@@ -528,6 +528,8 @@
 		}
 		else {
 			localStorage.setItem('show-tooltips','false');
+			e.setAttribute('aria-checked','false');
+			document.body.classList.remove('show-tooltips');
 		}
 	
 		e.addEventListener('click', function() {
