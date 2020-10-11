@@ -9,9 +9,22 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js" integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg==" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 	<style>
+		figure {
+			margin: 0 0 1em;
+		}
+		.gallery_image + .gallery_image {
+			margin-left: 3em;
+		}
+		
+		hr { margin: 1.5em 0; }
+		
+		.gallery_image h3 {
+			margin-top: 0;
+		}
+		
 		/* Wrapper is needed to create extra space*/
 		.gallery_image-wrapper {
-			padding: 1rem;
+			display: flex;
 		}
 
 		.gallery_image {
@@ -123,13 +136,29 @@
 			width: 1px;
 			word-wrap: normal !important;
 		}
-		.su-osd-toolbar kbd { 
+		
+		
+		
+		#mouse-commands li + li,
+		#keyboard-commands li + li {
+			margin-top: 0.5em;
+		}
+		
+		kbd {
+			display: inline-block;
 			white-space: nowrap;
 			font-family: 'Roboto Mono', monospace;
+			font-size: 0.8125em;
 			border: solid 1px #111;
-			padding: 0.0625rem 0.25rem;
-			font-size: 0.9125em;
+			padding: 0 0.25rem;
 			border-radius: 3px;
+			background: #e0e0e0;
+			color: #000;
+			line-height: 1.5;
+			
+		}
+		.su-osd-toolbar kbd { 
+			font-size: 0.9125em;
 			background: #eee;
 			color: #111;
 		}
@@ -224,7 +253,8 @@
 			padding: 5px;
 		} 
 		.suarrmaterials-zoomable-image-axs:focus-within {
-			box-shadow: inset 0px 0px 5px 0px #2B72D7;
+			box-shadow: inset 0px 0px 5px 0px #2B72D7, 
+			            0px 0px 5px 0px #2B72D7;
 			border-color: #2B72D7;
 		}
 		
@@ -263,7 +293,7 @@
 	</style>
 </head>
 <body>
-	<h1>OSD</h1>
+	<h1>Accessibility Wrappings for OpenSeaDragon</h1>
 	<div id="toolbar-template" class="su-osd-toolbar">
 		<button class="su-osd-zoomin">
 			<span aria-hidden="true" class="fa fa-plus-circle"></span>
@@ -274,7 +304,7 @@
 			<span class="tooltip">Zoom out <kbd>-</kbd> / <kbd>_</kbd></span>
 		</button>
 		<button class="su-osd-reset">
-			<span aria-hidden="true" class="fa fa-life-ring"></span>
+			<span aria-hidden="true" class="fa fa-retweet"></span>
 			<span class="tooltip">Reset view: <kbd>0</kbd></span>
 		</button>
 		<button class="su-osd-rotateleft">
@@ -287,7 +317,7 @@
 		</button>
 		<button class="su-osd-full">
 			<span aria-hidden="true" class="fa fa-expand"></span>
-			<span class="tooltip">Enter fullscreen</span>
+			<span class="tooltip">Enter fullscreen: <kbd>F</kbd></span>
 		</button>
 		<button class="su-osd-collapse">
 			<span aria-hidden="true" class="fa fa-compress"></span>
@@ -302,39 +332,98 @@
 
 	<span style="display:none" id="image-viewer-text">Image Viewer for </span>
 
+	<h2>Using the image viewer</h2>
+	<div id="tooltip-control">
+	
+		<button id="tooltip-toggle" class="switch-toggle" role="switch" aria-checked="false">
+			<span>Show tooltips</span>
+			<span aria-hidden="true" class="show-labels"></span>
+		</button>
+	</div>
+	<details id="mouse-commands">
+		<summary>Mouse Commands</summary>
+		<p>The image viewer can be controlled through the buttons on the 
+			toolbar and via the mouse itself. Mouse interactions include:
+		</p>
+		<ul>
+			<li>Mouse click zooms in on the image, centering on the point clicked</li>
+			<li>Mousewheel zooms in and out</li>
+			<li>Left mouse double click zooms in</li>
+			<li><kbd>Shift</kbd> + left double mouse click zooms out</li>
+			<li>Click and hold pans the image based on the mouse movements</li>
+		</ul>
+	</details>
+	<details id="keyboard-commands">
+		<summary>Keyboard Commands</summary>
+		<p>
+			When the image viewer is focused on (indicated by blue glow), these keyboard commands can be used.
+		</p>
+		<ul>
+			<li>
+				<kbd>W</kbd> or <kbd><span class="fa fa-long-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">Up Arrow</span></kbd>: Move viewport up
+			</li>
+			<li>
+				<kbd>S</kbd> or <kbd><span class="fa fa-long-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">Down Arrow</span></kbd>: Move viewport down
+			</li>
+			<li>
+				<kbd>A</kbd> or <kbd><span class="fa fa-long-arrow-left" aria-hidden="true"></span><span class="screen-reader-text">Left Arrow</span></kbd>: Move viewport left
+			</li>
+			<li>
+				<kbd>D</kbd> or <kbd><span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class="screen-reader-text">Right Arrow</span></kbd>: Move viewport right
+			</li>
+			<li>
+				<kbd>0</kbd>: Reset zoom and panning to default
+			</li>
+			<li>
+				<kbd>-</kbd> / <kbd>_</kbd> or <kbd>Shift</kbd> + <kbd>W</kbd> or <kbd>Shift</kbd> + <kbd><span class="fa fa-long-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">Up Arrow</span></kbd>: Zoom viewport out
+			</li>
+			<li>
+				<kbd>=</kbd> / <kbd>+</kbd> or <kbd>Shift</kbd> + <kbd>S</kbd> or <kbd>Shift</kbd> + <kbd><span class="fa fa-long-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">Down Arrow</span></kbd>: Zoom viewport in 
+			</li>
+			<li>
+				<kbd>R</kbd>: Rotate right / clockwise</
+			</li>
+			<li>
+				<kbd>Shift</kbd> + <kbd>R</kbd>: Rotate left / counterclockwise
+			</li>
+			<li>
+				<kbd>F</kbd>: Enter fullscreen view
+			</li>
+			<li>
+				<kbd>Escape</kbd>: Exit fullscreen view (when in fullscreen)
+			</li>
+		</ul>
+	</details>
+
+	<hr/>
+
 	<div class="gallery">
-		<h2 class="screen-reader-text">Sample Gallery</h2>
-		
-		<div id="tooltip-control">
-			<button id="tooltip-toggle" class="switch-toggle" role="switch" aria-checked="false">
-				<span>Show Tooltips in Viewers:</span>
-				<span aria-hidden="true" class="show-labels"></span>
-			</button>
-		</div>
-		
+		<h2>Sample Gallery</h2>
 		
 		<div class="gallery_image-wrapper">
 			<div class="gallery_image">
-				<h3 class="gallery_image-title">Medium Density square (DSC-17341)
+				<h3 class="gallery_image-title">Not Cheese Example 1
 				</h3>
 				<figure> 
 					<div id="materials-17341" class="suarrmaterials-zoomable-image-axs" style="height:400px; width:400px;" data-image="DSC_0331-2.jpg">
 					</lldiv>
 				</figure>
 				<div class="gallery_image-description" id="">
-					Camembert 
+					This is definitely not camembert
 				</div> <!-- end of description -->
 			</div> <!-- end of gallery-image -->
 			
+			
+			
 			<div class="gallery_image">
-				<h3 class="gallery_image-title">Medium Density square (DSC-17342)
+				<h3 class="gallery_image-title">Not Cheese Example 2
 				</h3>
 				<figure aria-labelledby="image-viewer-text d-materials-17342-name" aria-describedby="d-materials-17341-desc">
 					<div id="materials-17342" class="suarrmaterials-zoomable-image-axs" style="height:400px; width:400px;" data-image="DSC_0143-1.jpg">
 					</div>
 				</figure>
 				<div class="gallery_image-description" id="">
-					Camembert 
+					As far from cheddar as possible
 				</div> <!-- end of description -->
 			</div> <!-- end of gallery-image -->
 		</div> <!-- end of gallery-image-wrapper -->
@@ -409,7 +498,7 @@
 
 				
 				figure.find('.openseadragon-canvas').keypress(function(e) {
-					if(e.key == 'f') {
+					if(e.key == 'f' && !$('body').hasClass('full-page')) {
 						toolbar.find('.su-osd-full').click();
 						$('#' + imageId + ' .openseadragon-canvas').focus();
 					}
