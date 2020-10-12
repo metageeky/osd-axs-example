@@ -1,0 +1,70 @@
+button.switch-toggle {
+	background: none;
+	border: none;
+	display: inline-block;
+	font-size: inherit;
+	line-height: 1;
+	padding: .5em 0;
+	position: relative;
+	text-align: left;
+	display: inline-flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+}
+
+button.switch-toggle span.show-labels {
+	margin-left: 1em;
+	width: 4.95em; /* 1.6em + 0.8em + 1.75em (Off width) + 0.8em */
+	border: solid 2px #222;
+	padding: 0.25em;
+	position: relative;
+	top: 1px;
+	height: 1.6em;
+	border-radius: 0.8em;
+	font-size: 0.9125em;
+	background: #eee;
+	color: #000;
+}
+
+button.switch-toggle[aria-checked="true"] span.show-labels {
+	background: #F76900;
+	color: #fff;
+}
+button.switch-toggle span.show-labels:before {
+	content: "";
+	width: 1.6em;
+	height: 1.6em;
+	background: #222;
+	display: inline-block;
+	border: solid 2px #222;
+	border-radius: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: -1px;
+	right: auto;
+}
+
+button.switch-toggle[aria-checked="true"] span.show-labels:before {
+	left: auto;
+	right: -1px;
+}
+
+button.switch-toggle span.show-labels:after {
+	content: "OFF";
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: auto;
+	right: 0.8em;
+}
+
+button.switch-toggle[aria-checked="true"] span.show-labels:after {
+	content: "ON";
+	left: 1.175em; /* 0.8em + (1.75 - 1.3.75 for ON width) */
+	right: auto;
+}

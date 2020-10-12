@@ -8,6 +8,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js" integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg==" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+	
+	<script src="toggle.js"></script>
+	<link rel="stylesheet" href="toggle.css">
+	
 	<style>
 		figure {
 			margin: 0 0 1em;
@@ -50,73 +54,7 @@
 			display: block;
 		}
 	</style>
-	<style>
-		button.switch-toggle {
-			background: none;
-			border: none;
-			display: inline-block;
-			font-size: inherit;
-			line-height: 1;
-			padding: .5em 0;
-			position: relative;
-			text-align: left;
-			display: inline-flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			justify-content: space-between;
-			align-content: center;
-			align-items: center;
-		}
-		button.switch-toggle span.show-labels {
-			margin-left: 1em;
-			width: 4.95em; /* 1.6em + 0.8em + 1.75em (Off width) + 0.8em */
-			border: solid 2px #222;
-			padding: 0.25em;
-			position: relative;
-			top: 1px;
-			height: 1.6em;
-			border-radius: 0.8em;
-			font-size: 0.9125em;
-			background: #eee;
-			color: #000;
-		}
-		button.switch-toggle[aria-checked="true"] span.show-labels {
-			background: #F76900;
-			color: #fff;
-		}
-		button.switch-toggle span.show-labels:before {
-			content: "";
-			width: 1.6em;
-			height: 1.6em;
-			background: #222;
-			display: inline-block;
-			border: solid 2px #222;
-			border-radius: 100%;
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: -1px;
-			right: auto;
-		}
-		button.switch-toggle[aria-checked="true"] span.show-labels:before {
-			left: auto;
-			right: -1px;
-		}
-		button.switch-toggle span.show-labels:after {
-			content: "OFF";
-			display: inline-block;
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: auto;
-			right: 0.8em;
-		}
-		button.switch-toggle[aria-checked="true"] span.show-labels:after {
-			content: "ON";
-			left: 1.175em; /* 0.8em + (1.75 - 1.3.75 for ON width) */
-			right: auto;
-		}
-	</style>	
+
 	<style>
 		* { box-sizing: border-box; }
 		*:focus {
@@ -518,33 +456,6 @@
 	}); // end of ready
 })(jQuery);
 </script>
-<script>
-	window.addEventListener('load', function() {
-		let e = document.getElementById('tooltip-toggle');
-		let show_tooltips = localStorage.getItem('show-tooltips');
-		if(show_tooltips != null && show_tooltips == 'true') {
-			e.setAttribute('aria-checked','true');
-			document.body.classList.add('show-tooltips');
-		}
-		else {
-			localStorage.setItem('show-tooltips','false');
-			e.setAttribute('aria-checked','false');
-			document.body.classList.remove('show-tooltips');
-		}
-	
-		e.addEventListener('click', function() {
-			if(e.getAttribute('aria-checked') == 'true') {
-				e.setAttribute('aria-checked','false');
-				document.body.classList.remove('show-tooltips');
-				localStorage.setItem('show-tooltips','false');
-			}
-			else {
-				e.setAttribute('aria-checked','true');
-				document.body.classList.add('show-tooltips');
-				localStorage.setItem('show-tooltips','true');
-			}
-		});
-	});
-</script>
+
 </body>
 </html>
