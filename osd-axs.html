@@ -5,22 +5,25 @@
 	<meta charset="utf-8">
 	<title>OSD AXS Example</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js" integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg==" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 	
-	<script src="toggle.js"></script>
-	<link rel="stylesheet" href="toggle.css">
+	<link rel="stylesheet" href="css/default.css">
+	<link rel="stylesheet" href="css/tooltips.css">
+	
+	<script src="js/tooltips.js"></script>
+
 	
 	<style>
+	
 		figure {
-			margin: 0 0 1em;
+			margin-bottom: 1em;
 		}
 		.gallery_image + .gallery_image {
 			margin-left: 3em;
 		}
 		
-		hr { margin: 1.5em 0; }
+
 		
 		.gallery_image h3 {
 			margin-top: 0;
@@ -56,24 +59,7 @@
 	</style>
 
 	<style>
-		* { box-sizing: border-box; }
-		*:focus {
-			outline: #203299 solid 2px !important;
-			outline-offset: 2px !important;
-		}
-		.screen-reader-text {
-			border: 0;
-			clip: rect(1px, 1px, 1px, 1px);
-			-webkit-clip-path: inset(50%);
-			clip-path: inset(50%);
-			height: 1px;
-			margin: -1px;
-			overflow: hidden;
-			padding: 0;
-			position: absolute !important;
-			width: 1px;
-			word-wrap: normal !important;
-		}
+		
 		
 		
 		
@@ -82,22 +68,17 @@
 			margin-top: 0.5em;
 		}
 		
-		kbd {
+
+		.su-osd-toolbar kbd { 
 			display: inline-block;
 			white-space: nowrap;
-			font-family: 'Roboto Mono', monospace;
-			font-size: 0.8125em;
+			font-size: 0.9125em;
 			border: solid 1px #111;
 			padding: 0 0.25rem;
 			border-radius: 3px;
 			background: #e0e0e0;
 			color: #000;
 			line-height: 1.5;
-			
-		}
-		.su-osd-toolbar kbd { 
-			font-size: 0.9125em;
-			background: #eee;
 			color: #111;
 		}
 		.su-osd-toolbar {
@@ -137,55 +118,7 @@
 			margin-left: 0.25em;
 		}
 		
-		.su-osd-toolbar button .tooltip {
-			border: 0;
-			clip: rect(1px, 1px, 1px, 1px);
-			-webkit-clip-path: inset(50%);
-			clip-path: inset(50%);
-			height: 1px;
-			margin: -1px;
-			overflow: hidden;
-			padding: 0;
-			position: absolute !important;
-			width: 1px;
-			word-wrap: normal !important;
-		}
-		
-		body.show-tooltips .su-osd-toolbar button:focus .tooltip,
-		body.show-tooltips .su-osd-toolbar button:hover .tooltip {
-			display: inline-block;
-			overflow: visible;
-			width: auto;
-			height: auto;
-			margin: 0;
-			z-index: 10;
-			clip: auto;
-			-webkit-clip-path: none;
-			clip-path: none;
-			white-space: nowrap !important;
-			background: #2B72D7;
-			border: solid 1px #2B72D7;
-			color: #fff;
-			font-size: 0.9rem;
-			padding: 8px;
-			border-radius: 8px;
-			left: calc(100% + 0.875em);
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		body.show-tooltips .su-osd-toolbar button:focus .tooltip:before,
-		body.show-tooltips .su-osd-toolbar button:hover .tooltip:before {
-			content: "";
-			display: block;
-			border-top: 5px solid transparent;
-			border-bottom: 5px solid transparent;
-			border-right: 0.75em solid #2B72D7;
-			position: absolute;
-			left: -0.75em;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		
+
 		.suarrmaterials-zoomable-image-axs { 
 			border: solid 1px #000; 
 			padding: 5px;
