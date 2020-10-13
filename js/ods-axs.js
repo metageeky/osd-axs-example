@@ -72,12 +72,17 @@ window.addEventListener('load', function() {
 				v.viewport.applyConstraints();
 			});				
 			t.querySelector('.su-osd-full').addEventListener('click', function() {
+				// have to copy over the templates to the full view
+				let icons = document.getElementById('templates').cloneNode(true);
 				v.setFullPage(true);
+				document.body.prepend(icons);
 				document.body.classList.add('full-page');
 				document.body.setAttribute('data-current-viewer', v.id);
 				t.querySelector('button.su-osd-collapse').focus();
 			});
 			t.querySelector('.su-osd-collapse').addEventListener('click', function() {
+				// prevent the templates from hanging around
+				document.getElementById('templates').remove();
 				v.setFullPage(false);
 				document.body.classList.remove('full-page');
 				document.body.removeAttribute('data-current-viewer');

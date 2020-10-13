@@ -16,50 +16,99 @@
 	<script src="js/ods-axs.js"></script>
 </head>
 <body class="show-tooltips">
+
 	<h1>Accessibility Wrappings for OpenSeaDragon</h1>
 	
-	<div id="templates"> 
+	<div id="templates" aria-hidden="true"> 
+		<svg id="button-icons"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<defs>
+				<symbol id="icon-plus" viewBox="0 0 32 32">
+					<path d="M31 12h-11v-11c0-0.552-0.448-1-1-1h-6c-0.552 0-1 0.448-1 1v11h-11c-0.552 0-1 0.448-1 1v6c0 0.552 0.448 1 1 1h11v11c0 0.552 0.448 1 1 1h6c0.552 0 1-0.448 1-1v-11h11c0.552 0 1-0.448 1-1v-6c0-0.552-0.448-1-1-1z"></path>
+				</symbol>
+				<symbol id="icon-minus" viewBox="0 0 32 32">
+					<path d="M0 13v6c0 0.552 0.448 1 1 1h30c0.552 0 1-0.448 1-1v-6c0-0.552-0.448-1-1-1h-30c-0.552 0-1 0.448-1 1z"></path>
+				</symbol>
+				<symbol id="icon-target" viewBox="0 0 32 32">
+					<path d="M32 14h-3.154c-0.864-5.57-5.276-9.982-10.846-10.846v-3.154h-4v3.154c-5.57 0.864-9.982 5.276-10.846 10.846h-3.154v4h3.154c0.864 5.57 5.276 9.982 10.846 10.846v3.154h4v-3.154c5.57-0.864 9.982-5.276 10.846-10.846h3.154v-4zM24.776 14h-3.118c-0.603-1.705-1.953-3.056-3.658-3.658v-3.118c3.36 0.765 6.010 3.416 6.776 6.776zM16 18c-1.105 0-2-0.895-2-2s0.895-2 2-2c1.105 0 2 0.895 2 2s-0.895 2-2 2zM14 7.224v3.118c-1.705 0.603-3.056 1.953-3.658 3.658h-3.118c0.765-3.36 3.416-6.010 6.776-6.776zM7.224 18h3.118c0.603 1.705 1.953 3.056 3.658 3.658v3.118c-3.36-0.765-6.010-3.416-6.776-6.776zM18 24.776v-3.118c1.705-0.603 3.056-1.953 3.658-3.658h3.118c-0.765 3.36-3.416 6.010-6.776 6.776z"></path>
+				</symbol>
+				<symbol id="icon-rotate-cw" viewBox="0 0 32 32">
+					<path d="M32 12h-12l4.485-4.485c-2.267-2.266-5.28-3.515-8.485-3.515s-6.219 1.248-8.485 3.515c-2.266 2.267-3.515 5.28-3.515 8.485s1.248 6.219 3.515 8.485c2.267 2.266 5.28 3.515 8.485 3.515s6.219-1.248 8.485-3.515c0.189-0.189 0.371-0.384 0.546-0.583l3.010 2.634c-2.933 3.349-7.239 5.464-12.041 5.464-8.837 0-16-7.163-16-16s7.163-16 16-16c4.418 0 8.418 1.791 11.313 4.687l4.687-4.687v12z"></path>
+				</symbol>
+				<symbol id="icon-enlarge" viewBox="0 0 32 32">
+					<path d="M32 0v13l-5-5-6 6-3-3 6-6-5-5zM14 21l-6 6 5 5h-13v-13l5 5 6-6z"></path>
+				</symbol>
+				<symbol id="icon-shrink" viewBox="0 0 32 32">
+					<path d="M14 18v13l-5-5-6 6-3-3 6-6-5-5zM32 3l-6 6 5 5h-13v-13l5 5 6-6z"></path>
+				</symbol>
+			</defs>
+		</svg>
+
+		<div id="toolbar-describedby">
+			<span id="tooltip-zoomin"><kbd>=</kbd> / <kbd>+</kbd></span>
+			<span id="tooltip-zoomout"><kbd>-</kbd> / <kbd>_</kbd></span>
+			<span id="tooltip-reset"><kbd>0</kbd></span>
+			<span id="tooltip-rotate-left"><kbd>Shift</kbd> + <kbd>R</kbd></span>
+			<span id="tooltip-rotate-right"><kbd>R</kbd></span>
+			<span id="tooltip-fullscreen"><kbd>F</kbd></span>
+			<span id="tooltip-collapse"><kbd>Escape</kbd></span>
+		</div>
+	
 		<div id="toolbar-template" class="su-osd-toolbar">
-			<button class="su-osd-zoomin">
-				<span aria-hidden="true" class="fa fa-plus-circle"></span>
-				<span class="tooltip">Zoom in: <kbd>=</kbd> / <kbd>+</kbd></span>
+			<span class="button-container">
+			<button class="su-osd-zoomin" aria-label="Zoom In" aria-describedby="tooltip-zoomin">
+				<svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg>
 			</button>
-			<button class="su-osd-zoomout">
-				<span aria-hidden="true" class="fa fa-minus-circle"></span>
-				<span class="tooltip">Zoom out <kbd>-</kbd> / <kbd>_</kbd></span>
+			<span class="tooltip" aria-hidden="true">Zoom in: <kbd>=</kbd> / <kbd>+</kbd></span>
+			</span>
+			
+			<span class="button-container">
+			<button class="su-osd-zoomout" aria-label="Zoom Out"aria-describedby="tooltip-zoom-out">
+				<svg class="icon icon-minus"><use xlink:href="#icon-minus"></use></svg>
 			</button>
-			<button class="su-osd-reset" >
-				<span aria-hidden="true" class="fa fa-retweet"></span>
-				<span class="tooltip">Reset view: <kbd>0</kbd></span>
+			<span class="tooltip" aria-hidden="true">Zoom out: <kbd>-</kbd> / <kbd>_</kbd></span>
+			</span>
+			
+			<span class="button-container">
+			<button class="su-osd-reset" aria-label="Reset View" aria-describedby="tooltip-reset">
+				<svg class="icon icon-target"><use xlink:href="#icon-target"></use></svg>
 			</button>
-			<button class="su-osd-rotateleft">
-				<span aria-hidden="true" class="fa fa-rotate-left"></span>
-				<span class="tooltip">Rotate left: <kbd>Shift</kbd> + <kbd>R</kbd></span>
+			<span class="tooltip" aria-hidden="true">Reset view: <kbd>0</kbd></span>
+			</span>
+
+			<span class="button-container">
+			<button class="su-osd-rotateleft" aria-label="Rotate Left" aria-describedby="tooltip-rotate-left">
+				<svg class="icon icon-rotate-cw"><use xlink:href="#icon-rotate-cw"></use></svg>
 			</button>
-			<button class="su-osd-rotateright">
-				<span aria-hidden="true" class="fa fa-rotate-right"></span>
-				<span class="tooltip">Rotate right: <kbd>R</kbd></span>
+			<span class="tooltip" aria-hidden="true">Rotate left: <kbd>Shift</kbd> + <kbd>R</kbd></span>
+			</span>
+
+			<span class="button-container">
+			<button class="su-osd-rotateright" aria-label="Rotate Right" aria-describedby="tooltip-rotate-right">
+				<svg class="icon icon-rotate-cw"><use xlink:href="#icon-rotate-cw"></use></svg>
 			</button>
-			<button class="su-osd-full">
-				<span aria-hidden="true" class="fa fa-expand"></span>
-				<span class="tooltip">Enter fullscreen: <kbd>F</kbd></span>
+			<span class="tooltip" aria-hidden="true">Rotate right: <kbd>R</kbd></span>
+			</span>
+
+			<span class="button-container">
+			<button class="su-osd-full" aria-label="Enter Fullscreen" aria-describedby="tooltip-fullscreen">
+				<svg class="icon icon-enlarge"><use xlink:href="#icon-enlarge"></use></svg>
 			</button>
-			<button class="su-osd-collapse">
-				<span aria-hidden="true" class="fa fa-compress"></span>
-				<span class="tooltip">Exit fullscreen: <kbd>Esc</kbd></span>
+			<span class="tooltip" aria-hidden="true">Enter fullscreen: <kbd>F</kbd></span>
+			</span>
+
+			<span class="button-container">
+			<button class="su-osd-collapse" aria-label="Exit Fullscreen" aria-describedby="tooltip-collapse">
+				<svg class="icon icon-enlarge"><use xlink:href="#icon-shrink"></use></svg>
 			</button>
-			<!--
-			<button class="su-osd-info" aria-label="Show keyboard commands">
-				<span aria-hidden="true" class="fa fa-info-circle"></span>
-			</button>
-			-->
+			<span class="tooltip" aria-hidden="true">Exit fullscreen: <kbd>Esc</kbd></span>
+			</span>
+
 		</div>
 		<span id="image-viewer-text">Image Viewer for </span>
 	</div> <!-- end templates -->
 
 	<h2>Using the image viewer</h2>
 	<div id="tooltip-control">
-	
 		<button id="tooltip-toggle" class="switch-toggle" role="switch" aria-checked="true">
 			<span>Show tooltips</span>
 			<span aria-hidden="true" class="show-labels"></span>
@@ -72,9 +121,8 @@
 		</p>
 		<ul>
 			<li>Mouse click zooms in on the image, centering on the point clicked</li>
+			<li><kbd>Shift</kbd> + left  mouse click zooms out</li>
 			<li>Mousewheel zooms in and out</li>
-			<li>Left mouse double click zooms in</li>
-			<li><kbd>Shift</kbd> + left double mouse click zooms out</li>
 			<li>Click and hold pans the image based on the mouse movements</li>
 		</ul>
 	</details>
@@ -85,25 +133,27 @@
 		</p>
 		<ul>
 			<li>
-				<kbd>W</kbd> or <kbd><span class="fa fa-long-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">Up Arrow</span></kbd>: Move viewport up
+				<kbd>W</kbd> or <kbd aria-label="up arrow">&uarr;</kbd>: Move viewport up
 			</li>
 			<li>
-				<kbd>S</kbd> or <kbd><span class="fa fa-long-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">Down Arrow</span></kbd>: Move viewport down
+				<kbd>S</kbd> or <kbd aria-label="down arrow">&darr;</kbd>: Move viewport down
 			</li>
 			<li>
-				<kbd>A</kbd> or <kbd><span class="fa fa-long-arrow-left" aria-hidden="true"></span><span class="screen-reader-text">Left Arrow</span></kbd>: Move viewport left
+				<kbd>A</kbd> or <kbd aria-label="left arrow">&xlarr;</kbd>: Move viewport left
 			</li>
 			<li>
-				<kbd>D</kbd> or <kbd><span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class="screen-reader-text">Right Arrow</span></kbd>: Move viewport right
+				<kbd>D</kbd> or <kbd aria-label="right arrow">&xrarr;</kbd>: Move viewport right
 			</li>
 			<li>
 				<kbd>0</kbd>: Reset zoom and panning to default
 			</li>
 			<li>
-				<kbd>-</kbd> / <kbd>_</kbd> or <kbd>Shift</kbd> + <kbd>W</kbd> or <kbd>Shift</kbd> + <kbd><span class="fa fa-long-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">Up Arrow</span></kbd>: Zoom viewport out
+				<kbd>-</kbd> / <kbd>_</kbd> or <kbd>Shift</kbd> + <kbd>W</kbd> or 
+				<kbd>Shift</kbd> + <kbd aria-label="up arrow">&uarr;</kbd>: Zoom viewport out
 			</li>
 			<li>
-				<kbd>=</kbd> / <kbd>+</kbd> or <kbd>Shift</kbd> + <kbd>S</kbd> or <kbd>Shift</kbd> + <kbd><span class="fa fa-long-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">Down Arrow</span></kbd>: Zoom viewport in 
+				<kbd>=</kbd> / <kbd>+</kbd> or <kbd>Shift</kbd> + <kbd>S</kbd> or 
+				<kbd>Shift</kbd> + <kbd aria-label="down arrow">&darr;</kbd>: Zoom viewport in 
 			</li>
 			<li>
 				<kbd>R</kbd>: Rotate right / clockwise</
