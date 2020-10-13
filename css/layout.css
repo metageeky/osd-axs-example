@@ -35,6 +35,7 @@ figure {
 .gallery_image-description {
 	word-wrap: break-word;
 	word-break: break-word;
+	margin-top: 0.5em;
 }
 
 .gallery_image-graphic {

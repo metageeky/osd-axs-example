@@ -4,9 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>OSD AXS Example</title>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js" integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg==" crossorigin="anonymous"></script>
-	
+
 	<link rel="stylesheet" href="css/default.css">
 	<link rel="stylesheet" href="css/tooltips.css">
 	<link rel="stylesheet" href="css/layout.css">
@@ -18,8 +18,8 @@
 <body class="show-tooltips">
 
 	<h1>Accessibility Wrappings for OpenSeaDragon</h1>
-	
-	<div id="templates" aria-hidden="true"> 
+
+	<div id="templates" aria-hidden="true">
 		<svg id="button-icons"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
 				<symbol id="icon-plus" viewBox="0 0 32 32">
@@ -52,7 +52,7 @@
 			<span id="tooltip-fullscreen"><kbd>F</kbd></span>
 			<span id="tooltip-collapse"><kbd>Escape</kbd></span>
 		</div>
-	
+
 		<div id="toolbar-template" class="su-osd-toolbar">
 			<span class="button-container">
 			<button class="su-osd-zoomin" aria-label="Zoom In" aria-describedby="tooltip-zoom-in">
@@ -60,14 +60,14 @@
 			</button>
 			<span class="tooltip" aria-hidden="true">Zoom in: <kbd>=</kbd> / <kbd>+</kbd></span>
 			</span>
-			
+
 			<span class="button-container">
 			<button class="su-osd-zoomout" aria-label="Zoom Out" aria-describedby="tooltip-zoom-out">
 				<svg class="icon icon-minus"><use xlink:href="#icon-minus"></use></svg>
 			</button>
 			<span class="tooltip" aria-hidden="true">Zoom out: <kbd>-</kbd> / <kbd>_</kbd></span>
 			</span>
-			
+
 			<span class="button-container">
 			<button class="su-osd-reset" aria-label="Reset View" aria-describedby="tooltip-reset">
 				<svg class="icon icon-target"><use xlink:href="#icon-target"></use></svg>
@@ -116,7 +116,7 @@
 	</div>
 	<details id="mouse-commands">
 		<summary>Mouse Commands</summary>
-		<p>The image viewer can be controlled through the buttons on the 
+		<p>The image viewer can be controlled through the buttons on the
 			toolbar and via the mouse itself. Mouse interactions include:
 		</p>
 		<ul>
@@ -148,12 +148,12 @@
 				<kbd>0</kbd>: Reset zoom and panning to default
 			</li>
 			<li>
-				<kbd>-</kbd> / <kbd>_</kbd> or <kbd>Shift</kbd> + <kbd>W</kbd> or 
+				<kbd>-</kbd> / <kbd>_</kbd> or <kbd>Shift</kbd> + <kbd>W</kbd> or
 				<kbd>Shift</kbd> + <kbd aria-label="up arrow">&uarr;</kbd>: Zoom viewport out
 			</li>
 			<li>
-				<kbd>=</kbd> / <kbd>+</kbd> or <kbd>Shift</kbd> + <kbd>S</kbd> or 
-				<kbd>Shift</kbd> + <kbd aria-label="down arrow">&darr;</kbd>: Zoom viewport in 
+				<kbd>=</kbd> / <kbd>+</kbd> or <kbd>Shift</kbd> + <kbd>S</kbd> or
+				<kbd>Shift</kbd> + <kbd aria-label="down arrow">&darr;</kbd>: Zoom viewport in
 			</li>
 			<li>
 				<kbd>R</kbd>: Rotate right / clockwise</
@@ -174,12 +174,12 @@
 
 	<div class="gallery">
 		<h2>Sample Gallery</h2>
-		
+
 		<div class="gallery_image-wrapper">
 			<div class="gallery_image">
 				<h3 class="gallery_image-title">Not Cheese Example 1
 				</h3>
-				<figure> 
+				<figure>
 					<div id="materials-17341" class="suarrmaterials-zoomable-image-axs" style="height:400px; width:400px;" data-image="DSC_0331-2.jpg">
 					</div>
 					<figcaption class="gallery_image-description" id="">
@@ -188,7 +188,7 @@
 				</figure>
 
 			</div> <!-- end of gallery-image -->
-			
+
 			<div class="gallery_image">
 				<h3 class="gallery_image-title">Not Cheese Example 2
 				</h3>
@@ -200,9 +200,9 @@
 					</figcaption> <!-- end of description -->
 				</figure?
 			</div> <!-- end of gallery-image -->
-		
+
 		</div> <!-- end of gallery-image-wrapper -->
-	
+
 	</div> <!-- end of gallery -->
 
 </body>

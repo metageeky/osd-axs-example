@@ -14,24 +14,23 @@ window.addEventListener('load', function() {
 		var imagePath = 'images/' + ods[i].getAttribute('data-image');
 		var figure = ods[i].parentElement;
 		var title = figure.previousElementSibling; // H3.gallery_image-title
-		var desc = figure.nextElementSibling; // div.gallery_image-description
+		var caption = figure.querySelector('figcaption'); // div.gallery_image-description
 		
 		/* Add IDs */
 		figure.id = imageId + '-figure';
 		title.id = imageId + '-title';
-		desc.id = imageId + '-description';
+		caption.id = imageId + '-description';
 		
 		/* ARIA tagging */
 		figure.setAttribute('aria-labelledby', 'image-viewer-text ' + title.id);
-		figure.setAttribute('aria-describedby', desc.id);
-		
+		 
 		/* Clone the toolbar and connect it */
 		var toolbar = document.getElementById('toolbar-template').cloneNode(true);
 		toolbar.id = imageId + '-toolbar';
 		figure.prepend(toolbar);
 		
 		/* Create the OSD Viewer */
-		var viewer = OpenSeadragon({
+		let viewer = OpenSeadragon({
 			id: imageId,
 			showNavigationControl: false,
 			toolbar: imageId + '-toolbar',
@@ -45,7 +44,12 @@ window.addEventListener('load', function() {
 		viewer.addHandler('open', function(e) { 
 			let v = e.eventSource; // viewer
 			let t = document.getElementById(v.id + '-toolbar');
-			var f = document.getElementById(v.id + '-figure');
+			let f = document.getElementById(v.id + '-figure');
+			let c = f.querySelector('canvas');
+			
+			// add role and label to canvas
+			c.setAttribute('role','img');
+			c.setAttribute('aria-labelledby',v.id + '-title');
 			
 			// disable flip command
 			v.viewport.toggleFlip = function(){ };
