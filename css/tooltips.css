@@ -70,10 +70,6 @@ button.switch-toggle[aria-checked="true"] span.show-labels:after {
 }
 
 
-.su-osd-toolbar span.button-container {
-	display: inline-block;
-	position: relative;
-}
 
 .su-osd-toolbar button span.tooltip {
 	display: none;
@@ -88,22 +84,30 @@ body.show-tooltips .su-osd-toolbar button:hover + span.tooltip {
 	display: inline-block;
 	position: absolute;
 	white-space: nowrap !important;
-	background: #fff;
-	border: solid 1px #111;
-	color: #000;
 	font-size: 0.875rem;
-	padding: 5px;
-	border-radius: 8px;
-	top: 2.25em;
-	left: 2.25em;
-}
-
-body.show-tooltips .su-osd-toolbar button:focus + span.tooltip {
-	z-index: 1;
+	padding: 0.375rem;
+	border-radius: 0.5rem;
+	top: 2.5em;
+	left: 2.5em;
 }
 
 body.show-tooltips .su-osd-toolbar button:hover + span.tooltip {
+	background: #fff;
+	border: solid 1px #111;
+	color: #000;
+}
+body.show-tooltips .su-osd-toolbar button:focus + span.tooltip {
+	background: #203299;
+	border: solid 1px #eee;
+	color: #fff;
+}
+
+body.show-tooltips .su-osd-toolbar button:focus + span.tooltip {
 	z-index: 2;
+}
+
+body.show-tooltips .su-osd-toolbar button:hover + span.tooltip {
+	z-index: 1;
 }
 
 /*

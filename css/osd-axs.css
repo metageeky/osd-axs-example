@@ -39,6 +39,16 @@ kbd {
 .su-osd-toolbar > div {
 	display: none;
 }
+
+.su-osd-toolbar span.button-container {
+	display: inline-block;
+	position: relative;
+}
+
+.su-osd-toolbar span.button-container + span.button-container {
+	margin-left: 0.3125rem;
+}
+
 .su-osd-toolbar button { 
 	background: #ddd; 
 	padding: 0; 
@@ -46,8 +56,8 @@ kbd {
 	border: solid 1px;
 	line-height: 1;
 	position: relative;
-	width: 36px;
-	height: 36px;
+	width: 2.625rem;
+	height: 2.625rem;
 	vertical-align: middle;
 	display: inline-flex;
 	justify-content: center;
@@ -78,7 +88,7 @@ kbd {
 	outline: none !important;
 }
 .su-osd-toolbar button:focus svg {
-	fill: #fff;
+	fill: #ddd;
 }
 
 

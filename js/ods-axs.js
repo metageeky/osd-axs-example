@@ -14,7 +14,7 @@ window.addEventListener('load', function() {
 		var imagePath = 'images/' + ods[i].getAttribute('data-image');
 		var figure = ods[i].parentElement;
 		var title = figure.previousElementSibling; // H3.gallery_image-title
-		var caption = figure.querySelector('figcaption'); // div.gallery_image-description
+		var caption = figure.querySelector('div.gallery_image-description'); 
 		
 		/* Add IDs */
 		figure.id = imageId + '-figure';
