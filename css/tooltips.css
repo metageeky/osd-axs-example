@@ -69,7 +69,6 @@ button.switch-toggle[aria-checked="true"] span.show-labels:after {
 	right: auto;
 }
 
-
 .su-osd-toolbar button .tooltip {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -117,4 +116,17 @@ body.show-tooltips .su-osd-toolbar button:hover .tooltip:before {
 	left: -0.75em;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+.su-osd-toolbar .tooltip kbd { 
+	display: inline-block;
+	white-space: nowrap;
+	font-size: 0.9125em;
+	border: solid 1px #111;
+	padding: 0 0.25rem;
+	border-radius: 3px;
+	background: #e0e0e0;
+	color: #000;
+	line-height: 1.5;
+	color: #111;
 }

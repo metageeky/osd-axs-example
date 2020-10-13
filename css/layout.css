@@ -1,0 +1,44 @@
+/* Much of these rules come the SU Architectural Materials site */
+figure {
+	margin-bottom: 1em;
+}
+
+#templates {
+	display: none;
+}
+
+.gallery_image + .gallery_image {
+	margin-left: 3em;
+}
+
+.gallery_image h3 {
+	margin-top: 0;
+}
+
+/* Wrapper is needed to create extra space*/
+.gallery_image-wrapper {
+	display: flex;
+}
+
+.gallery_image {
+	max-width: 450px;
+}
+
+.gallery_image-description {
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+.gallery_image-graphic {
+	margin: 0 0 1rem 0;
+	/* Add small spacing between image and description */
+	padding: 0 0 56.25% 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.gallery_image-graphic-inline {
+	max-width: 100%;
+	margin: 0 0 1rem 0;
+	display: block;
+}
