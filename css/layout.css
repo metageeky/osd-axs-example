@@ -4,8 +4,16 @@ figure {
 }
 
 #templates {
+	position: absolute;
+	width: 0; 
+	height: 0; 
+	overflow: hidden;
+}
+#toolbar-describedby, 
+#toolbar-template {
 	display: none;
 }
+
 
 .gallery_image + .gallery_image {
 	margin-left: 3em;
