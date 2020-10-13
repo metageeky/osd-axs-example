@@ -23,6 +23,7 @@ window.addEventListener('load', function() {
 		
 		/* ARIA tagging */
 		figure.setAttribute('aria-labelledby', 'image-viewer-text ' + title.id);
+		figure.setAttribute('aria-describedby', caption.id);
 		 
 		/* Clone the toolbar and connect it */
 		var toolbar = document.getElementById('toolbar-template').cloneNode(true);
@@ -45,11 +46,11 @@ window.addEventListener('load', function() {
 			let v = e.eventSource; // viewer
 			let t = document.getElementById(v.id + '-toolbar');
 			let f = document.getElementById(v.id + '-figure');
-			let c = f.querySelector('canvas');
+			let c = f.querySelector('.openseadragon-canvas');
 			
-			// add role and label to canvas
+			// add role and label to interactive viewer
 			c.setAttribute('role','img');
-			c.setAttribute('aria-labelledby',v.id + '-title');
+			c.setAttribute('aria-labelledby','interactive-image ' + v.id + '-title');
 			
 			// disable flip command
 			v.viewport.toggleFlip = function(){ };
