@@ -5,332 +5,57 @@
 	<meta charset="utf-8">
 	<title>OSD AXS Example</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js" integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg==" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-	<style>
-		figure {
-			margin: 0 0 1em;
-		}
-		.gallery_image + .gallery_image {
-			margin-left: 3em;
-		}
-		
-		hr { margin: 1.5em 0; }
-		
-		.gallery_image h3 {
-			margin-top: 0;
-		}
-		
-		/* Wrapper is needed to create extra space*/
-		.gallery_image-wrapper {
-			display: flex;
-		}
+	
+	<link rel="stylesheet" href="css/default.css">
+	<link rel="stylesheet" href="css/tooltips.css">
+	<link rel="stylesheet" href="css/layout.css">
+	<link rel="stylesheet" href="css/osd-axs.css">
 
-		.gallery_image {
-			max-width: 450px;
-		}
-
-		.gallery_image-description {
-			word-wrap: break-word;
-			word-break: break-word;
-		}
-
-		.gallery_image-graphic {
-			margin: 0 0 1rem 0;
-			/* Add small spacing between image and description */
-			padding: 0 0 56.25% 0;
-			background-size: cover;
-			background-repeat: no-repeat;
-		}
-
-		.gallery_image-graphic-inline {
-			max-width: 100%;
-			margin: 0 0 1rem 0;
-			display: block;
-		}
-	</style>
-	<style>
-		button.switch-toggle {
-			background: none;
-			border: none;
-			display: inline-block;
-			font-size: inherit;
-			line-height: 1;
-			padding: .5em 0;
-			position: relative;
-			text-align: left;
-			display: inline-flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			justify-content: space-between;
-			align-content: center;
-			align-items: center;
-		}
-		button.switch-toggle span.show-labels {
-			margin-left: 1em;
-			width: 4.95em; /* 1.6em + 0.8em + 1.75em (Off width) + 0.8em */
-			border: solid 2px #222;
-			padding: 0.25em;
-			position: relative;
-			top: 1px;
-			height: 1.6em;
-			border-radius: 0.8em;
-			font-size: 0.9125em;
-			background: #eee;
-			color: #000;
-		}
-		button.switch-toggle[aria-checked="true"] span.show-labels {
-			background: #F76900;
-			color: #fff;
-		}
-		button.switch-toggle span.show-labels:before {
-			content: "";
-			width: 1.6em;
-			height: 1.6em;
-			background: #222;
-			display: inline-block;
-			border: solid 2px #222;
-			border-radius: 100%;
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: -1px;
-			right: auto;
-		}
-		button.switch-toggle[aria-checked="true"] span.show-labels:before {
-			left: auto;
-			right: -1px;
-		}
-		button.switch-toggle span.show-labels:after {
-			content: "OFF";
-			display: inline-block;
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: auto;
-			right: 0.8em;
-		}
-		button.switch-toggle[aria-checked="true"] span.show-labels:after {
-			content: "ON";
-			left: 1.175em; /* 0.8em + (1.75 - 1.3.75 for ON width) */
-			right: auto;
-		}
-	</style>	
-	<style>
-		* { box-sizing: border-box; }
-		*:focus {
-			outline: #203299 solid 2px !important;
-			outline-offset: 2px !important;
-		}
-		.screen-reader-text {
-			border: 0;
-			clip: rect(1px, 1px, 1px, 1px);
-			-webkit-clip-path: inset(50%);
-			clip-path: inset(50%);
-			height: 1px;
-			margin: -1px;
-			overflow: hidden;
-			padding: 0;
-			position: absolute !important;
-			width: 1px;
-			word-wrap: normal !important;
-		}
-		
-		
-		
-		#mouse-commands li + li,
-		#keyboard-commands li + li {
-			margin-top: 0.5em;
-		}
-		
-		kbd {
-			display: inline-block;
-			white-space: nowrap;
-			font-family: 'Roboto Mono', monospace;
-			font-size: 0.8125em;
-			border: solid 1px #111;
-			padding: 0 0.25rem;
-			border-radius: 3px;
-			background: #e0e0e0;
-			color: #000;
-			line-height: 1.5;
-			
-		}
-		.su-osd-toolbar kbd { 
-			font-size: 0.9125em;
-			background: #eee;
-			color: #111;
-		}
-		.su-osd-toolbar {
-			margin-bottom: 8px;
-			position: relative;
-		}
-		.su-osd-toolbar > div {
-			display: none;
-		}
-		.su-osd-toolbar button { 
-			background: #ddd; 
-			width: 34px; 
-			height: 34px; 
-			padding: 0; 
-			font-size: 24px; 
-			border-radius: 50%; 
-			border: solid 1px;
-			line-height: 1;
-			position: relative;
-		} 
-		.su-osd-toolbar button:hover {
-			box-shadow: 0px 0px 10px 0px #2B72D7;
-		}
-		.su-osd-toolbar button:focus {
-			background: #203299;
-			border-color: #203299;
-			color: #fff;
-			outline: none !important;
-		}
-		.su-osd-toolbar button:active {
-			background: #F76900;
-			border-color: #F76900;
-			color: #fff;
-		}
-		
-		.su-osd-toolbar button + button { 
-			margin-left: 0.25em;
-		}
-		
-		.su-osd-toolbar button .tooltip {
-			border: 0;
-			clip: rect(1px, 1px, 1px, 1px);
-			-webkit-clip-path: inset(50%);
-			clip-path: inset(50%);
-			height: 1px;
-			margin: -1px;
-			overflow: hidden;
-			padding: 0;
-			position: absolute !important;
-			width: 1px;
-			word-wrap: normal !important;
-		}
-		
-		body.show-tooltips .su-osd-toolbar button:focus .tooltip,
-		body.show-tooltips .su-osd-toolbar button:hover .tooltip {
-			display: inline-block;
-			overflow: visible;
-			width: auto;
-			height: auto;
-			margin: 0;
-			z-index: 10;
-			clip: auto;
-			-webkit-clip-path: none;
-			clip-path: none;
-			white-space: nowrap !important;
-			background: #2B72D7;
-			border: solid 1px #2B72D7;
-			color: #fff;
-			font-size: 0.9rem;
-			padding: 8px;
-			border-radius: 8px;
-			left: calc(100% + 0.875em);
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		body.show-tooltips .su-osd-toolbar button:focus .tooltip:before,
-		body.show-tooltips .su-osd-toolbar button:hover .tooltip:before {
-			content: "";
-			display: block;
-			border-top: 5px solid transparent;
-			border-bottom: 5px solid transparent;
-			border-right: 0.75em solid #2B72D7;
-			position: absolute;
-			left: -0.75em;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		
-		.suarrmaterials-zoomable-image-axs { 
-			border: solid 1px #000; 
-			padding: 5px;
-		} 
-		.suarrmaterials-zoomable-image-axs:focus-within {
-			box-shadow: inset 0px 0px 5px 0px #2B72D7, 
-			            0px 0px 5px 0px #2B72D7;
-			border-color: #2B72D7;
-		}
-		
-		#toolbar-template {
-			display:none;
-		}
-		.su-osd-toolbar button.su-osd-full {
-			display: inline-block; 
-		}
-		.su-osd-toolbar button.su-osd-collapse {
-			display: none;
-		}
-		body.full-page {
-			display: flex;
-			flex-direction: column;
-			flex-wrap: nowrap;
-			justify-content: flex-start;
-			align-content: flex-start;
-			align-items: flex-start;
-		}
-		body.full-page .su-osd-toolbar {
-			margin: 5px;
-		}
-		body.full-page .suarrmaterials-zoomable-image-axs {
-			width: 100% !important;
-			height: auto !important;
-			flex: 1 1 auto;
-			padding: 5px !important;
-		}
-		body.full-page .su-osd-toolbar button.su-osd-full {
-			display: none; 
-		}
-		body.full-page .su-osd-toolbar button.su-osd-collapse {
-			display: inline-block;
-		}
-	</style>
+	<script src="js/tooltips.js"></script>
+	<script src="js/ods-axs.js"></script>
 </head>
 <body class="show-tooltips">
 	<h1>Accessibility Wrappings for OpenSeaDragon</h1>
-	<div id="toolbar-template" class="su-osd-toolbar">
-		<button class="su-osd-zoomin">
-			<span aria-hidden="true" class="fa fa-plus-circle"></span>
-			<span class="tooltip">Zoom in: <kbd>=</kbd> / <kbd>+</kbd></span>
-		</button>
-		<button class="su-osd-zoomout">
-			<span aria-hidden="true" class="fa fa-minus-circle"></span>
-			<span class="tooltip">Zoom out <kbd>-</kbd> / <kbd>_</kbd></span>
-		</button>
-		<button class="su-osd-reset">
-			<span aria-hidden="true" class="fa fa-retweet"></span>
-			<span class="tooltip">Reset view: <kbd>0</kbd></span>
-		</button>
-		<button class="su-osd-rotateleft">
-			<span aria-hidden="true" class="fa fa-rotate-left"></span>
-			<span class="tooltip">Rotate left: <kbd>Shift</kbd> + <kbd>R</kbd></span>
-		</button>
-		<button class="su-osd-rotateright">
-			<span aria-hidden="true" class="fa fa-rotate-right"></span>
-			<span class="tooltip">Rotate right: <kbd>R</kbd></span>
-		</button>
-		<button class="su-osd-full">
-			<span aria-hidden="true" class="fa fa-expand"></span>
-			<span class="tooltip">Enter fullscreen: <kbd>F</kbd></span>
-		</button>
-		<button class="su-osd-collapse">
-			<span aria-hidden="true" class="fa fa-compress"></span>
-			<span class="tooltip">Exit fullscreen: <kbd>Esc</kbd></span>
-		</button>
-		<!--
-		<button class="su-osd-info" aria-label="Show keyboard commands">
-			<span aria-hidden="true" class="fa fa-info-circle"></span>
-		</button>
-		-->
-	</div>
-
-	<span style="display:none" id="image-viewer-text">Image Viewer for </span>
+	
+	<div id="templates"> 
+		<div id="toolbar-template" class="su-osd-toolbar">
+			<button class="su-osd-zoomin">
+				<span aria-hidden="true" class="fa fa-plus-circle"></span>
+				<span class="tooltip">Zoom in: <kbd>=</kbd> / <kbd>+</kbd></span>
+			</button>
+			<button class="su-osd-zoomout">
+				<span aria-hidden="true" class="fa fa-minus-circle"></span>
+				<span class="tooltip">Zoom out <kbd>-</kbd> / <kbd>_</kbd></span>
+			</button>
+			<button class="su-osd-reset" >
+				<span aria-hidden="true" class="fa fa-retweet"></span>
+				<span class="tooltip">Reset view: <kbd>0</kbd></span>
+			</button>
+			<button class="su-osd-rotateleft">
+				<span aria-hidden="true" class="fa fa-rotate-left"></span>
+				<span class="tooltip">Rotate left: <kbd>Shift</kbd> + <kbd>R</kbd></span>
+			</button>
+			<button class="su-osd-rotateright">
+				<span aria-hidden="true" class="fa fa-rotate-right"></span>
+				<span class="tooltip">Rotate right: <kbd>R</kbd></span>
+			</button>
+			<button class="su-osd-full">
+				<span aria-hidden="true" class="fa fa-expand"></span>
+				<span class="tooltip">Enter fullscreen: <kbd>F</kbd></span>
+			</button>
+			<button class="su-osd-collapse">
+				<span aria-hidden="true" class="fa fa-compress"></span>
+				<span class="tooltip">Exit fullscreen: <kbd>Esc</kbd></span>
+			</button>
+			<!--
+			<button class="su-osd-info" aria-label="Show keyboard commands">
+				<span aria-hidden="true" class="fa fa-info-circle"></span>
+			</button>
+			-->
+		</div>
+		<span id="image-viewer-text">Image Viewer for </span>
+	</div> <!-- end templates -->
 
 	<h2>Using the image viewer</h2>
 	<div id="tooltip-control">
@@ -406,14 +131,12 @@
 				</h3>
 				<figure> 
 					<div id="materials-17341" class="suarrmaterials-zoomable-image-axs" style="height:400px; width:400px;" data-image="DSC_0331-2.jpg">
-					</lldiv>
+					</div>
 				</figure>
 				<div class="gallery_image-description" id="">
 					This is definitely not camembert
 				</div> <!-- end of description -->
 			</div> <!-- end of gallery-image -->
-			
-			
 			
 			<div class="gallery_image">
 				<h3 class="gallery_image-title">Not Cheese Example 2
@@ -426,125 +149,10 @@
 					As far from cheddar as possible
 				</div> <!-- end of description -->
 			</div> <!-- end of gallery-image -->
-		</div> <!-- end of gallery-image-wrapper -->
-	</div> <!-- end of gallery -->
-	
-<script>
-(function($) {
-	$(document).ready(function() {
-		$('.suarrmaterials-zoomable-image-axs').each( function() {
-			var imageId = $(this).attr('id');
-			var imagePath = "images/" + $("#" + imageId).attr('data-image');
-			var figure = $(this).parent();
-			var title = figure.siblings('.gallery_image-title');
-			var desc = figure.siblings('.gallery_image-description');
-
-			title.attr('id', imageId + '-title');
-			desc.attr('id', imageId + '-description');
-			
-			figure.attr('aria-labelledby', 'image-viewer-text ' + title.attr('id'));
-			figure.attr('aria-describedby', desc.attr('id'));
-			
-			var toolbar = $('#toolbar-template').clone();
-			toolbar.attr('id', 'toolbar-' + imageId);
-			$(this).parent().prepend(toolbar);
-			
-			var viewer = OpenSeadragon({
-				id: imageId,
-				toolbar: 'toolbar-' + imageId,
-				prefixUrl: "images/",
-				tileSources:{
-					type: "image",
-					url: imagePath,
-					buildPyramid: false
-				}
-			});
-			viewer.addHandler('open', function() { 
-				// disable flip
-				viewer.viewport.toggleFlip = function(){ };
-			
-				toolbar.find('.su-osd-zoomin').click(function() {
-					viewer.viewport.zoomBy(1.5);
-					viewer.viewport.applyConstraints();
-				});
-				toolbar.find('.su-osd-zoomout').click(function() {
-					viewer.viewport.zoomBy(0.667);
-					viewer.viewport.applyConstraints();
-				});
-				toolbar.find('.su-osd-reset').click(function() {
-					viewer.viewport.goHome();
-					viewer.viewport.applyConstraints();
-				});
-				toolbar.find('.su-osd-rotateleft').click(function() {
-					viewer.viewport.setRotation(viewer.viewport.getRotation() - 90);
-					viewer.viewport.applyConstraints();
-				});
-				toolbar.find('.su-osd-rotateright').click(function() {
-					viewer.viewport.setRotation(viewer.viewport.getRotation() + 90);
-					viewer.viewport.applyConstraints();
-				});				
-				toolbar.find('.su-osd-full').click(function() {
-					viewer.setFullPage(true);
-					$('body').toggleClass('full-page');
-					$('body').attr('data-current-viewer', imageId);
-					toolbar.find('button.su-osd-collapse').focus();
-				});
-				toolbar.find('.su-osd-collapse').click(function() {
-					viewer.setFullPage(false);
-					$('body').toggleClass('full-page');
-					$('body').removeAttr('data-current-viewer');
-					toolbar.find('button.su-osd-full').focus();
-				});
-
-				
-				figure.find('.openseadragon-canvas').keypress(function(e) {
-					if(e.key == 'f' && !$('body').hasClass('full-page')) {
-						toolbar.find('.su-osd-full').click();
-						$('#' + imageId + ' .openseadragon-canvas').focus();
-					}
-				});
-			});
-
-		}); // end of each
 		
-		$('body').keyup(function(e) {
-			if(e.key == 'Escape' && $('body').hasClass('full-page')) {
-				var id = $('body').attr('data-current-viewer');
-				$('#toolbar-' + id + ' button.su-osd-collapse').click();
-				//$('body').toggleClass('full-page');
-			}
-		});
-
-	}); // end of ready
-})(jQuery);
-</script>
-<script>
-	window.addEventListener('load', function() {
-		let e = document.getElementById('tooltip-toggle');
-		let show_tooltips = localStorage.getItem('show-tooltips');
-		if(show_tooltips != null && show_tooltips == 'true') {
-			e.setAttribute('aria-checked','true');
-			document.body.classList.add('show-tooltips');
-		}
-		else {
-			localStorage.setItem('show-tooltips','false');
-			e.setAttribute('aria-checked','false');
-			document.body.classList.remove('show-tooltips');
-		}
+		</div> <!-- end of gallery-image-wrapper -->
 	
-		e.addEventListener('click', function() {
-			if(e.getAttribute('aria-checked') == 'true') {
-				e.setAttribute('aria-checked','false');
-				document.body.classList.remove('show-tooltips');
-				localStorage.setItem('show-tooltips','false');
-			}
-			else {
-				e.setAttribute('aria-checked','true');
-				document.body.classList.add('show-tooltips');
-				localStorage.setItem('show-tooltips','true');
-			}
-		});
-	});
-</script>
+	</div> <!-- end of gallery -->
+
 </body>
 </html>
